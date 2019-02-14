@@ -13,44 +13,48 @@ $(document).ready( ()=>{
     })
 
     $(".btn-danger").on('click', (e)=>{
-
+        $("#lock_area").empty();
     })
 
 } )
 
 
 var DrawLocks = (numberOfLocks) =>{
-    var htmlLockText  = ``;
     for(var i = 1; i<=numberOfLocks; i++){
-        htmlLockText += `<i class="fas fa-lock fa-4x" id="lock_${i}"></i>`
-        $("#lock_area").html(htmlLockText);
+        $("#lock_area").append(`<img src="source/lock.png" id="lock_${i}" class="lock locked">`)
     }
 }
 
 
 var SolvePuzzle = (timeInMilliseconds, numberOfLocks)=>{
-    // var counter = 1;
-    // while(counter <= numberOfLocks){
-    //     for(var incremental = counter; incremental<=numberOfLocks; incremental += counter){
-    //         console.log(incremental);
-    //     }
-    //     counter++;
-    // }
-
-    //get all the elements with class fas
-    var fasElements = document.getElementsByClassName("svg-inline--fa");
-    var counter = 1;
+    var numberOfFlips = 0;
+    var numberOfLocked = numberOfLocks;
+    let counter = 1;
+    let i = 1;
     while( counter <= numberOfLocks ){
-        for(var incremental = counter; incremental <= numberOfLocks; incremental += counter){
-            //toggle classes over here
-            if( $(`#lock_${incremental}`).hasClass("fa-lock") ){
-                $(`#lock_${incremental}`).toggleClass(`fa-unlock`);
-            }
-            else if( $(`#lock_${incremental}`).hasClass("fa-unlock") ){
-                $(`#lock_${incremental}`).toggleClass("fa-lock");
-            }
-            console.log(incremental);
+        for(let incremental = counter; incremental <= numberOfLocks; incremental += counter, i++){
+            setTimeout(()=>{
+                if( $(`#lock_${incremental}`).hasClass("locked") ){
+                    $(`#lock_${incremental}`).removeClass(`locked`);
+                    $(`#lock_${incremental}`).addClass(`unlocked`);
+                    $(`#lock_${incremental}`).attr(`src`, `source/unlock.png`)
+                    numberOfLocked--;
+                    numberOfFlips++;
+                }
+                else if( $(`#lock_${incremental}`).hasClass("unlocked") ){
+                    $(`#lock_${incremental}`).removeClass(`unlocked`);
+                    $(`#lock_${incremental}`).addClass(`locked`);
+                    $(`#lock_${incremental}`).attr(`src`, `source/lock.png`);
+                    numberOfFlips++;
+                    numberOfLocked++;
+                }
+            }, i * timeInMilliseconds)
+            console.log(i*timeInMilliseconds)
         }
         counter++;
     }
+    
+    setTimeout(()=>{
+        console.log(`Number of Flips are ${numberOfFlips} and Number of Locks are ${numberOfLocked}`);
+    }, 10000)
 }
