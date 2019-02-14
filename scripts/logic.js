@@ -3,25 +3,42 @@
 
 $(document).ready( ()=>{
     $(".btn-success").on('click', (e)=>{
-        console.log("success button is clicked");
+        //get time and number of locks
         var timeInMilliseconds = $("#time").val();
         var numberOfLocks = $("#locks").val();
+        
+        if( timeInMilliseconds.NaN || numberOfLocks.NaN ){
+            alert("Invalid Data");
+        }
+        
         timeInMilliseconds = parseInt(timeInMilliseconds);
         numberOfLocks = parseInt(numberOfLocks);
+        
+        //once the user has clicked the start button disable it make flips = 0 and locks = 0 in their respective buttons
+        $(".btn-success").prop('disabled', true)
+        $("#noOfFlips").text(`Flips 0`)
+        $("#noOfLocks").text(`Locks 0`)
+        
+        //draw locks and solve the problem
         DrawLocks(numberOfLocks);
         SolvePuzzle(timeInMilliseconds, numberOfLocks);
     })
-
+    // if reset button is clicked
     $(".btn-danger").on('click', (e)=>{
+        //empty everything in lock area id element
+        //and make flips and locks = 0
         $("#lock_area").empty();
+        $(".btn-success").prop('disabled', false);
+        $("#noOfFlips").text(`Flips 0`)
+        $("#noOfLocks").text(`Locks 0`)
     })
 
 } )
 
 
 var DrawLocks = (numberOfLocks) =>{
-    $("#status").append(`<button type="button" class="btn btn-info" id="noOfFlips">Flips 0</button>
-              <button type="button" class="btn btn-info" id="noOfLocks">Locks 0</button>`)
+//    $("#status").append(`<button type="button" class="btn btn-info" id="noOfFlips">Flips 0</button>
+//              <button type="button" class="btn btn-info" id="noOfLocks">Locks 0</button>`)
     
     for(var i = 1; i<=numberOfLocks; i++){
         $("#lock_area").append(`<img src="source/lock.png" id="lock_${i}" class="lock locked">`)
