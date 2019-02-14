@@ -20,6 +20,9 @@ $(document).ready( ()=>{
 
 
 var DrawLocks = (numberOfLocks) =>{
+    $("#status").append(`<button type="button" class="btn btn-info" id="noOfFlips">Flips 0</button>
+              <button type="button" class="btn btn-info" id="noOfLocks">Locks 0</button>`)
+    
     for(var i = 1; i<=numberOfLocks; i++){
         $("#lock_area").append(`<img src="source/lock.png" id="lock_${i}" class="lock locked">`)
     }
@@ -34,20 +37,23 @@ var SolvePuzzle = (timeInMilliseconds, numberOfLocks)=>{
     while( counter <= numberOfLocks ){
         for(let incremental = counter; incremental <= numberOfLocks; incremental += counter, i++){
             setTimeout(()=>{
-                if( $(`#lock_${incremental}`).hasClass("locked") ){
+                if( $(`#lock_${incremental}`).
+                   hasClass("locked") ){
                     $(`#lock_${incremental}`).removeClass(`locked`);
                     $(`#lock_${incremental}`).addClass(`unlocked`);
                     $(`#lock_${incremental}`).attr(`src`, `source/unlock.png`)
-                    numberOfLocked--;
                     numberOfFlips++;
+                    $("#noOfFlips").text(`Flips ${numberOfFlips}`);
                 }
                 else if( $(`#lock_${incremental}`).hasClass("unlocked") ){
                     $(`#lock_${incremental}`).removeClass(`unlocked`);
                     $(`#lock_${incremental}`).addClass(`locked`);
                     $(`#lock_${incremental}`).attr(`src`, `source/lock.png`);
                     numberOfFlips++;
-                    numberOfLocked++;
+                    $("#noOfFlips").text(`Flips ${numberOfFlips}`);
                 }
+                numberOfLocked = $(".locked")
+                $("#noOfLocks").text(`Locks ${numberOfLocked.length}`);
             }, i * timeInMilliseconds)
             console.log(i*timeInMilliseconds)
         }

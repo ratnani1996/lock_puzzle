@@ -21,19 +21,32 @@
       <div class="container">
           <div class="row">
               <form class="form-inline">
+                  <div class="col-md-6">
                   <div class="form-group">
                       <label for="time">Time</label>
                       <input type="text" class="form-control" id="time" placeholder="Input Time(ms)">
                   </div>
+                  </div>
+                  <div class="col-md-6">
                   <div class="form-group">
                       <label for="locks">Locks</label>
                       <input type="text" class="form-control" id="locks" placeholder="Input Locks">
                   </div>
+                  </div>
               </form>
           </div>
           <div class="row">
-              <button type="button" class="btn btn-success">Start</button>
-              <button type="button" class="btn btn-danger">Reset</button>
+              <div class="col-md-6">
+                  <button type="button" class="btn btn-success">Start</button>
+              </div>
+              <div class="col-md-6">
+                  <button type="button" class="btn btn-danger">Reset</button>
+              </div>
+              
+          </div>
+          <hr>
+          <div class="row" id="status">
+              
           </div>
       </div>
           <div class="container" id="lock_area" >
