@@ -7,21 +7,27 @@ $(document).ready( ()=>{
         var timeInMilliseconds = $("#time").val();
         var numberOfLocks = $("#locks").val();
         
-        if( timeInMilliseconds.NaN || numberOfLocks.NaN ){
-            alert("Invalid Data");
-        }
-        
         timeInMilliseconds = parseInt(timeInMilliseconds);
         numberOfLocks = parseInt(numberOfLocks);
         
-        //once the user has clicked the start button disable it make flips = 0 and locks = 0 in their respective buttons
-        $(".btn-success").prop('disabled', true)
-        $("#noOfFlips").text(`Flips 0`)
-        $("#noOfLocks").text(`Locks 0`)
+        
+        //if a user enters invalid input then popup alert
+        if( isNaN(timeInMilliseconds) || isNaN(numberOfLocks) ){
+            alert("Invalid Input");
+            $(".btn-success").prop('disabled', false);
+        }
+        //else calculate the solution and make start button disabled
+        else{
+            $(".btn-success").prop('disabled', true)
+            $("#noOfFlips").text(`Flips 0`)
+            $("#noOfLocks").text(`Locks 0`)
         
         //draw locks and solve the problem
-        DrawLocks(numberOfLocks);
-        SolvePuzzle(timeInMilliseconds, numberOfLocks);
+            DrawLocks(numberOfLocks);
+            SolvePuzzle(timeInMilliseconds, numberOfLocks);
+        }
+        //once the user has clicked the start button disable it make flips = 0 and locks = 0 in their respective buttons
+        
     })
     // if reset button is clicked
     $(".btn-danger").on('click', (e)=>{
@@ -31,9 +37,14 @@ $(document).ready( ()=>{
         $(".btn-success").prop('disabled', false);
         $("#noOfFlips").text(`Flips 0`)
         $("#noOfLocks").text(`Locks 0`)
+        
+        //make form fields blank
+        $("#time").val("");
+        $("#locks").val("");
     })
 
 } )
+
 
 
 var DrawLocks = (numberOfLocks) =>{
@@ -81,3 +92,6 @@ var SolvePuzzle = (timeInMilliseconds, numberOfLocks)=>{
         console.log(`Number of Flips are ${numberOfFlips} and Number of Locks are ${numberOfLocked}`);
     }, 10000)
 }
+
+
+

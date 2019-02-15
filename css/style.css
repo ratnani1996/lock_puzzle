@@ -2,7 +2,7 @@
 
 
 img{
-    height: 8vh;
+    height: 2vh;
 }
 
 header .jumbotron {
@@ -31,6 +31,7 @@ form[class="form-inline"]{
 /*    margin: auto;*/
 }
 
+
 .btn-danger{
     width: 45%;
     margin: 1rem;
@@ -53,6 +54,30 @@ form[class="form-inline"]{
 #lock_area img{
     margin: 0.5rem;
 }
+
+#flow-buttons{
+    display: block;
+    text-align: center;
+    margin: auto;
+}
+
+#flow-buttons button{
+    width: 40%;
+}
+
+#locks{
+    width: 45%;
+}
+
+#time{
+    width: 40%;
+}
+
+
+.btn-success, .btn-danger {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
 
 /*
 button{
