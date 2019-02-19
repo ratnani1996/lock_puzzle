@@ -6,10 +6,10 @@ img{
 }
 
 header .jumbotron {
-    background-color: #0a3d62;
+    background-color: #2980b9;
     color: white;
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.7rem;
     border-radius: 0px;
 }
 
@@ -18,33 +18,15 @@ label[for="time"], label[for="locks"]{
     padding: 10px;
 }
 
-form[class="form-inline"]{
-    margin-left: auto;
-    margin-right: auto;
-}
 
 
-.btn-success{
-    width: 45%;
-    margin: 1rem;
-    font-size: 1.2rem;
-/*    margin: auto;*/
-}
 
 
-.btn-danger{
-    width: 45%;
-    margin: 1rem;
-    font-size: 1.2rem;
-/*    margin: auto;*/
-}
 
 .btn-info{
     background-color: white;
     color: black;
     font-size: 1.2rem;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #lock_area{
@@ -65,19 +47,26 @@ form[class="form-inline"]{
     width: 40%;
 }
 
-#locks{
-    width: 45%;
+
+.fas{
+    margin-left: 1vw;
+    margin-right: 1vw;
+    margin-bottom: 4vh;
 }
 
-#time{
-    width: 40%;
-}
 
-
-.btn-success, .btn-danger {
+.btn-success, .btn-danger, .btn-info {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.fa-unlock{
+    color: #2980b9;
+}
+
+.btn-success, .btn-danger{
+    width: 100%;
+    margin-top: 3vh;
+}
 
 /*
 button{

@@ -12,7 +12,7 @@ $(document).ready( ()=>{
         
         
         //if a user enters invalid input then popup alert
-        if( isNaN(timeInMilliseconds) || isNaN(numberOfLocks) ){
+        if( isNaN(timeInMilliseconds) || isNaN(numberOfLocks)  ){
             alert("Invalid Input");
             $(".btn-success").prop('disabled', false);
         }
@@ -52,7 +52,8 @@ var DrawLocks = (numberOfLocks) =>{
 //              <button type="button" class="btn btn-info" id="noOfLocks">Locks 0</button>`)
     
     for(var i = 1; i<=numberOfLocks; i++){
-        $("#lock_area").append(`<img src="source/lock.png" id="lock_${i}" class="lock locked">`)
+        $("#lock_area").append(`<i class="fas fa-lock fa-2x" id="lock_${i}" ></i>`)
+//        $("#lock_area").append(`<img src="source/lock.png" id="lock_${i}" class="lock locked">`)
     }
 }
 
@@ -66,21 +67,21 @@ var SolvePuzzle = (timeInMilliseconds, numberOfLocks)=>{
         for(let incremental = counter; incremental <= numberOfLocks; incremental += counter, i++){
             setTimeout(()=>{
                 if( $(`#lock_${incremental}`).
-                   hasClass("locked") ){
-                    $(`#lock_${incremental}`).removeClass(`locked`);
-                    $(`#lock_${incremental}`).addClass(`unlocked`);
-                    $(`#lock_${incremental}`).attr(`src`, `source/unlock.png`)
+                   hasClass("fa-lock") ){
+                    $(`#lock_${incremental}`).removeClass(`fa-lock`);
+                    $(`#lock_${incremental}`).addClass(`fa-unlock`);
+//                    $(`#lock_${incremental}`).attr(`src`, `source/unlock.png`)
                     numberOfFlips++;
                     $("#noOfFlips").text(`Flips ${numberOfFlips}`);
                 }
-                else if( $(`#lock_${incremental}`).hasClass("unlocked") ){
-                    $(`#lock_${incremental}`).removeClass(`unlocked`);
-                    $(`#lock_${incremental}`).addClass(`locked`);
-                    $(`#lock_${incremental}`).attr(`src`, `source/lock.png`);
+                else if( $(`#lock_${incremental}`).hasClass("fa-unlock") ){
+                    $(`#lock_${incremental}`).removeClass(`fa-unlock`);
+                    $(`#lock_${incremental}`).addClass(`fa-lock`);
+//                    $(`#lock_${incremental}`).attr(`src`, `source/lock.png`);
                     numberOfFlips++;
                     $("#noOfFlips").text(`Flips ${numberOfFlips}`);
                 }
-                numberOfLocked = $(".locked")
+                numberOfLocked = $(".fa-lock")
                 $("#noOfLocks").text(`Locks ${numberOfLocked.length}`);
             }, i * timeInMilliseconds)
             console.log(i*timeInMilliseconds)
